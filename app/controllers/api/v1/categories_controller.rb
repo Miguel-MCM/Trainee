@@ -9,7 +9,40 @@ class Api::V1::CategoriesController < ApplicationController
         render json: category, status: :ok
 
     rescue StandardError => e
-        #head(:not_found)
         render json: e, status: :not_found
+    end
+
+    def create
+        category = Category.new(category_params)
+        category.save!
+        render json: category, status: :created
+
+    rescue StandardError => e
+        render json: e, status: :bad_request
+    end
+
+    def update
+        category = Category.find(params[:id])
+        category.update!(category_params)
+        render json: category, status: :ok
+
+    rescue StandardError => e
+        render json: e, status: :bad_request
+
+    end
+
+    def delete
+        category = Category.find(params[:id])
+        category.destroy!
+        render json: { message: "Categoria #{category.name} deletada"}, status: :ok
+
+    rescue StandardError => e
+        render json: e, status: :bad_request
+
+    end
+    private
+
+    def category_params
+        params.require(:category).permit(:name)
     end
 end

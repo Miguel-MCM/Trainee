@@ -11,10 +11,6 @@ for nome in categorias
     Category.create!(name: nome)
 end
 
-entradas = ['Pate', 'Bruschettas', 'Batata Frita', 'Porção de Frios']
-pratos_principais = ['Rosbife', 'Macarronada', 'Peito de Frango', 'Salada César']
-sobremesas = ['Pudim', 'Gelatina', 'Sorvete', 'Salada de Frutas']
-
 Product.create!(name: 'Pate', description: 'Pães sírios e um paté de atum', price: 800, category_id: 1)
 Product.create!(name: 'Bruschettas', description: 'Antepasto italiano feito com uma fatia de pão rústico', price: 800, category_id: 1)
 Product.create!(name: 'Porção de Batatas Fritas', description: 'Uma porção de batatas em tiras fritas', price: 850, category_id: 1)

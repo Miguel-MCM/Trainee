@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         post 'create', to: 'categories#create'
         patch 'update/:id', to: 'categories#update'
         delete 'delete/:id', to: 'categories#delete'
+        get 'category_filtered/:id', to: 'categories#category_filter'
       end
 
       scope 'products' do

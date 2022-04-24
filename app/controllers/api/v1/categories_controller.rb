@@ -40,6 +40,14 @@ class Api::V1::CategoriesController < ApplicationController
         render json: e, status: :bad_request
 
     end
+
+    def category_filter
+        category = Category.find(params[:id])
+        products = category.products
+        render json: products, status: :ok
+    rescue StandardError => e
+        render json: e, status: :not_found
+    end
     private
 
     def category_params

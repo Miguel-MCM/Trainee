@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users, skip: :all
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 
@@ -19,6 +20,10 @@ Rails.application.routes.draw do
         post 'create', to: 'products#create'
         patch 'update/:id', to: 'products#update'
         delete 'delete/:id', to: 'products#delete' 
+      end
+
+      scope 'users' do
+        get 'login', to: 'users#login'
       end
     end
   end

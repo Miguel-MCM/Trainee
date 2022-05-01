@@ -22,3 +22,6 @@ Product.create!(name: 'Rattatouile', description: 'Prato de legumes cozidos, igu
 Product.create!(name: 'Pudim', description: 'Pudim de leite condensado, quem não adora um pudinzinho?', price: 1500, category_id: 3)
 Product.create!(name: 'Gelatina', description: 'Gelatina sabor cereja, o favorito das crianças', price: 1350, category_id: 3)
 Product.create!(name: 'Salada de Frutas', description: 'Salada de frutas com mamão, laranja, banana, maçã, morango, pessego e uva. Uma ótima opção saudável para sobremesa', price: 1250, category_id: 3)
+
+User.create!(email: 'a@email.com', password: '123456', name: 'a', is_admin: true)
+User.create!(email: 'b@email.com', password: '654321', name: 'b', is_admin: false)

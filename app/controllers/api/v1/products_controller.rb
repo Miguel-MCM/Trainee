@@ -1,4 +1,5 @@
 class Api::V1::ProductsController < ApplicationController
+    acts_as_token_authentication_handler_for User, only: [:create, :update, :delete]
     def index
         products = Product.all
         render json: products, status: :ok
@@ -12,26 +13,38 @@ class Api::V1::ProductsController < ApplicationController
     end
 
     def create
-        product = Product.new(product_params)
-        product.save!
-        render json: product, status: :created
+        if current_user.is_admin
+            product = Product.new(product_params)
+            product.save!
+            render json: product, status: :created
+        else
+            render json: {message: "Não autorizado"}, status: :unauthorized
+        end
     rescue StandardError => e
         render json: e, status: :bad_request
     end
 
     def update
-        product = Product.find(params[:id])
-        product.update!(product_params)
-        render json: product, status: :ok
+        if current_user.is_admin
+            product = Product.find(params[:id])
+            product.update!(product_params)
+            render json: product, status: :ok
+        else
+            render json: {message: "Não autorizado"}, status: :unauthorized
+        end
     rescue StandardError => e
         render json: e, status: :unprocessable_entity
 
     end
 
     def delete
-        product = Product.find(params[:id])
-        product.destroy!
-        render json: { message: "Produto #{product.name} deletado"}, status: :ok
+        if current_user.is_admin
+            product = Product.find(params[:id])
+            product.destroy!
+            render json: { message: "Produto #{product.name} deletado"}, status: :ok
+        else
+            render json: {message: "Não autorizado"}, status: :unauthorized
+        end
     rescue StandardError => e
         render json: e, status: :bad_request
     end

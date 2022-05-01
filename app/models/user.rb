@@ -6,4 +6,9 @@ class User < ApplicationRecord
 
   validates :name ,presence: :true
   acts_as_token_authenticatable
+
+  has_many :favorites, dependent: :destroy
+  has_many :products, through: :favorites
+
+  has_one_attached :photo
 end

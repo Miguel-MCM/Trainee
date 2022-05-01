@@ -43,3 +43,5 @@ gem 'figaro'
 
 gem 'devise'
 gem 'simple_token_authentication', '~> 1.17'
+
+gem 'active_model_serializers'

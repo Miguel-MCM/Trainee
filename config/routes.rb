@@ -24,6 +24,13 @@ Rails.application.routes.draw do
 
       scope 'users' do
         get 'login', to: 'users#login'
+        post 'logout', to: 'users#logout'
+        get 'favorites', to: 'users#favorites'
+      end
+
+      scope 'favorites' do
+        post 'create', to: 'favorites#create'
+        delete 'delete/:product_id', to: 'favorites#delete'
       end
     end
   end
